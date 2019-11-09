@@ -23,16 +23,6 @@ import java.util.concurrent.TimeUnit;
  */
 public class Main {
 
-//    @FindBy(xpath = "//input[@id='search_query_top']")
-//    private static WebElement searchField;
-
-    @FindBy(xpath = "//td[@class='cart_total']")
-    private static WebElement totalValue;
-
-    // Shopping Cart.
-
-
-
     public static void main(String[] args) throws InterruptedException {
         WebDriver wd;
 
