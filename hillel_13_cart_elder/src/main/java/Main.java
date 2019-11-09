@@ -38,7 +38,7 @@ public class Main {
         System.setProperty("webdriver.chrome.driver", "C:\\!Setup\\Dev\\Webdrivers\\chromedriver.exe");
         wd = new ChromeDriver();
         wd.manage().window().maximize();
-        wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        wd.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         wd.get("http://automationpractice.com/index.php");
 // * 2. В поле поиска ввести “Blouse” и выполнить поиск
         WebElement searchField = wd.findElement(By.xpath("//input[@id='search_query_top']"));
@@ -70,14 +70,18 @@ public class Main {
             System.out.println("Increase Quantity button is found: PASS");
         }
         buttonPlus.click();
-        //
+        // TO DO: требуется ожидание пересчета страницы
         WebElement qtyField = wd.findElement(By.xpath("//input[contains(@class,'cart_quantity_input')]"));
+        for (int i = 0; i < 10; i++) {
+            if (qtyField.getText() == "2")
+                break;
+        }
 // * 6. Проверить что значения отображаются корректно:
 // * Total для товара , Total products, Total shipping , Total всех товаров , Tax и TOTAL общий
-        WebElement totalValue = wd.findElement(By.xpath("//td[@id='total_product']"));
+        WebElement totalValue = wd.findElement(By.xpath("//span[contains(@id,'total_product_price')]"));
         System.out.printf("Total price: expected ($54.00), actual: (%s)\n", totalValue.getText());
 
-        WebElement totalProductsValue = wd.findElement(By.xpath("//td[@id='total_shipping']"));
+        WebElement totalProductsValue = wd.findElement(By.xpath("//td[@id='total_product']"));
         System.out.printf("Total price: expected ($54.00), actual: (%s)\n", totalProductsValue.getText());
 
         WebElement totalShippingValue = wd.findElement(By.xpath("//td[@id='total_shipping']"));
