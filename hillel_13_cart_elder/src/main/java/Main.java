@@ -3,6 +3,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 import java.util.Set;
@@ -31,7 +33,7 @@ public class Main {
 
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         WebDriver wd;
 
 // * 1. Открыть главную страницу automationpractice.com
@@ -65,41 +67,50 @@ public class Main {
             System.out.println("Checkout button is found: PASS");
         buttonCheckout.click();
 // * 5. В секции Summary увеличить количество товаров на 1
+        WebElement qtyField = wd.findElement(By.xpath("//input[contains(@class,'cart_quantity_input')]"));
+        String oldValue = qtyField.getAttribute("value"); // сохраняем значение как образец
+        String newValue = oldValue;
+        System.out.println("Old Quantity is " + oldValue);
         WebElement buttonPlus = wd.findElement(By.xpath("//a[contains(@class,'cart_quantity_up')]"));
         if (buttonPlus != null) {
             System.out.println("Increase Quantity button is found: PASS");
         }
-        buttonPlus.click();
+        buttonPlus.click(); // увеличиваем значение
+        //
+        // ждем до 10 секунд или пока не появился элемент с id=bar
+//        WebElement explicitWait = (new WebDriverWait(wd, 5))
+//                .until(ExpectedConditions.refreshed(qtyField));
+//                .until(ExpectedConditions.presenceOfElementLocated(By.id("bar")));
         // TO DO: требуется ожидание пересчета страницы
-        WebElement qtyField = wd.findElement(By.xpath("//input[contains(@class,'cart_quantity_input')]"));
         for (int i = 0; i < 10; i++) {
-            if (qtyField.getText() == "2")
-                break;
+            Thread.sleep(500);
+            qtyField = wd.findElement(By.xpath("//input[contains(@class,'cart_quantity_input')]"));
+            newValue = qtyField.getAttribute("value");
+//            System.out.println("New Quantity is " + newValue);
+            if (newValue != oldValue) {
+                break; // значение поменялось
+            }
         }
+        System.out.println("New Quantity is " + newValue);
 // * 6. Проверить что значения отображаются корректно:
 // * Total для товара , Total products, Total shipping , Total всех товаров , Tax и TOTAL общий
         WebElement totalValue = wd.findElement(By.xpath("//span[contains(@id,'total_product_price')]"));
-        System.out.printf("Total price: expected ($54.00), actual: (%s)\n", totalValue.getText());
+        System.out.printf("Total ITEM PRICE: expected ($54.00), actual: (%s)\n", totalValue.getText());
 
         WebElement totalProductsValue = wd.findElement(By.xpath("//td[@id='total_product']"));
-        System.out.printf("Total price: expected ($54.00), actual: (%s)\n", totalProductsValue.getText());
+        System.out.printf("Total PRODUCTS: expected ($54.00), actual: (%s)\n", totalProductsValue.getText());
 
         WebElement totalShippingValue = wd.findElement(By.xpath("//td[@id='total_shipping']"));
-        if (totalShippingValue.getText() == "$2.00") {
-            System.out.println("Total shipping ($2.00): PASS");
-        }
+        System.out.printf("Total SHIPPING: expected ($2.00), actual: (%s)\n", totalShippingValue.getText());
+
         WebElement totalPriceValue = wd.findElement(By.xpath("//td[@id='total_price_without_tax']"));
-        if (totalPriceValue.getText() == "$56.00") {
-            System.out.println("Total ($56.00): PASS");
-        }
+        System.out.printf("Total PRICE W/O TAX: expected ($56.00), actual: (%s)\n", totalPriceValue.getText());
+
         WebElement totalTaxValue = wd.findElement(By.xpath("//td[@id='total_tax']"));
-        if (totalTaxValue.getText() == "$0.00") {
-            System.out.println("Tax ($0.00): PASS");
-        }
+        System.out.printf("Total TAX: expected ($0.00), actual: (%s)\n", totalTaxValue.getText());
+
         WebElement totalCartValue = wd.findElement(By.xpath("//td[@id='total_price_container']"));
-        if (totalCartValue.getText() == "$56.00") {
-            System.out.println("Grand Total ($54.00): PASS");
-        }
+        System.out.printf("Total CART PRICE: expected ($56.00), actual: (%s)\n", totalCartValue.getText());
 // * 7. Удалить товар из корзины
         WebElement buttonDelete = wd.findElement(By.xpath("//a[@title='Delete']"));
         if (buttonDelete != null) {
@@ -107,8 +118,14 @@ public class Main {
         }
         buttonDelete.click();
 // * 8. Проверить что корзина пустая
-        WebElement alertCart = wd.findElement(By.xpath("//p[contains(@class,'alert')]"));
-        if (alertCart.getText() == "Your shopping cart is empty.")
+        By alertLocator = By.xpath("//p[contains(@class,'alert')]");
+        // ждем до 5 секунд или пока не появился элемент по локатору alertLocator
+        WebElement alertWait = (new WebDriverWait(wd, 5))
+                .until(ExpectedConditions.presenceOfElementLocated(alertLocator));
+        WebElement alertCart = wd.findElement(alertLocator);
+        String alertText = alertCart.getAttribute("textContent");
+        System.out.println(alertText);
+        if (alertText.equals("Your shopping cart is empty."))
             System.out.println("Shopping Cart is empty: PASS");
 // close the browser
         wd.close();
