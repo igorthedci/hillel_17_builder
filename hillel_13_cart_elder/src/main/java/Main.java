@@ -3,12 +3,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 
 /**
  * 1. Открыть главную страницу automationpractice.com
@@ -57,30 +59,32 @@ public class Main {
             System.out.println("Checkout button is found: PASS");
         buttonCheckout.click();
 // * 5. В секции Summary увеличить количество товаров на 1
-        WebElement qtyField = wd.findElement(By.xpath("//input[contains(@class,'cart_quantity_input')]"));
+        By locQty = By.xpath("//input[contains(@class,'cart_quantity_input')]");
+        WebElement qtyField = wd.findElement(locQty);
         String oldValue = qtyField.getAttribute("value"); // сохраняем значение как образец
-        String newValue = oldValue;
+        String newValue = "2"; // oldValue;
         System.out.println("Old Quantity is " + oldValue);
-        WebElement buttonPlus = wd.findElement(By.xpath("//a[contains(@class,'cart_quantity_up')]"));
+        WebElement buttonPlus = wd.findElement(By.xpath("//i[@class='icon-plus']"));
         if (buttonPlus != null) {
             System.out.println("Increase Quantity button is found: PASS");
         }
         buttonPlus.click(); // увеличиваем значение
         //
-        // ждем до 10 секунд или пока не появился элемент с id=bar
-//        WebElement explicitWait = (new WebDriverWait(wd, 5))
-//                .until(ExpectedConditions.refreshed(qtyField));
-//                .until(ExpectedConditions.presenceOfElementLocated(By.id("bar")));
+        WebDriverWait waitForNewValue = new WebDriverWait(wd, 10);
+        waitForNewValue
+                .until(ExpectedConditions.attributeToBe(locQty, "value", newValue));
+        //                .until(ExpectedConditions.presenceOfElementLocated(locQty));
         // TO DO: требуется ожидание пересчета страницы
-        for (int i = 0; i < 10; i++) {
-            Thread.sleep(500);
-            qtyField = wd.findElement(By.xpath("//input[contains(@class,'cart_quantity_input')]"));
-            newValue = qtyField.getAttribute("value");
+//        for (int i = 0; i < 10; i++) {
+//            Thread.sleep(500);
+//            qtyField = wd.findElement(By.xpath("//input[contains(@class,'cart_quantity_input')]"));
+//            newValue = qtyField.getAttribute("value");
 //            System.out.println("New Quantity is " + newValue);
-            if (newValue != oldValue) {
-                break; // значение поменялось
-            }
-        }
+//            if (!newValue.equals(oldValue)) {
+//                break; // значение поменялось
+//            }
+//        }
+        newValue = wd.findElement(locQty).getAttribute("value");
         System.out.println("New Quantity is " + newValue);
 // * 6. Проверить что значения отображаются корректно:
 // * Total для товара , Total products, Total shipping , Total всех товаров , Tax и TOTAL общий
