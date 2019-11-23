@@ -30,6 +30,10 @@ public class HeaderPage {
 
     @FindBy(xpath = "//a[@class='login']")    // Sign In
     private WebElement titleSignIn;
+    @FindBy(xpath = "//a[@class='logout']")    // Sign Out
+    private WebElement titleSignOut;
+    @FindBy(xpath = "//a[@class='account']")    // User Info
+    private WebElement titleUserInfo;
 
     /**
      * METHODS
@@ -43,8 +47,22 @@ public class HeaderPage {
         return this;
     }
 
-    public HeaderPage clickSignIn() {
+    public SignInPage clickSignIn() {
         titleSignIn.click();
-        return this;
+        return new SignInPage(driver);
+    }
+    public HeaderPage clickSignOut() {
+        titleSignOut.click();
+        return this; // QUESTION: may be new HeaderPage() ???
+    }
+    public boolean isGuestMode() {
+        if (titleUserInfo == null)
+            return true;
+        return false;
+    }
+    public boolean isUserMode() {
+        if (titleUserInfo != null)
+            return true;
+        return false;
     }
 }
