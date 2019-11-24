@@ -12,10 +12,17 @@ public class CreateAccountForm {
         this.driver = driver;
     }
 
-    @FindBy(xpath = "//form[@id='create-account_form']/h3")
+
+    @FindBy(xpath = "//h1") // CREATE AN ACCOUNT
+    private WebElement titlePage;
+
+    @FindBy(xpath = "//div[contains(@class,'alert')]") // Alert
+    private WebElement alertCreateAccount;
+
+    @FindBy(xpath = "//form[@id='create-account_form']/h3") // YOUR PERSONAL INFORMATION
     private WebElement titlePersonalInformation;
 
-    @FindBy(xpath = "//div[@class='clearfix']/label")
+    @FindBy(xpath = "//div[@class='clearfix']/label") // Title
     private WebElement titleGender;
 
     @FindBy(xpath = "//input[@id='id_gender1']") // gender Mr.
@@ -110,51 +117,44 @@ public class CreateAccountForm {
     @FindBy(xpath = "//input[@id='postcode']")
     private WebElement inputAddressPostcode;
 
-    @FindBy(xpath = "//label[@for='country']") // Country
-    private WebElement labelAddressCountry;
-    @FindBy(xpath = "//input[@id='country']")
-    private WebElement inputAddressCountry;
+    @FindBy(xpath = "//label[@for='other']") // Additional information
+    private WebElement labelAddressOther;
+    @FindBy(xpath = "//textarea[@id='other']")
+    private WebElement inputAddressOther;
 
-    @FindBy(xpath = "//button[@id='SubmitCreate']")
-    private WebElement buttonCreateAccount;
-    @FindBy(xpath = "//div[@id='create_account_error']")
-    private WebElement alertCreateAccount;
+    @FindBy(xpath = "//label[@for='phone']") // Home phone
+    private WebElement labelAddressHomePhone;
+    @FindBy(xpath = "//textarea[@id='phone']")
+    private WebElement inputAddressHomePhone;
+
+    @FindBy(xpath = "//label[@for='phone_mobile']") // Mobile phone
+    private WebElement labelAddressMobilePhone;
+    @FindBy(xpath = "//textarea[@id='phone_mobile']")
+    private WebElement inputAddressMobilePhone;
+
+    @FindBy(xpath = "//label[@for='alias']") // Alias
+    private WebElement labelAddressAlias;
+    @FindBy(xpath = "//textarea[@id='alias']")
+    private WebElement inputAddressAlias;
+
+    @FindBy(xpath = "//button[@id='SubmitAccount']") // Register
+    private WebElement buttonRegisterAccount;
+    @FindBy(xpath = "//button[@id='SubmitAccount']/span")
+    private WebElement labelRegisterAccount;
+
 
     public String getPageTitle() {
         return titlePage.getText();
     }
-    public String getCreateAccountTitle() {
-        return titleCreateAccount.getText();
-    }
-    public String getEmailHint() {
-        return textEmailHint.getText();
-    }
-    public String getEmailTitle() {
-        return titleEmailAddress.getText();
-    }
-    public String getCreateButtonTitle() {
-        return buttonCreateAccount.getText();
-    }
+
     public boolean isPageValid() {
-        if (this.getPageTitle() != "AUTHENTICATION")
-            return false;
-        if (this.getCreateAccountTitle() != "CREATE AN ACCOUNT")
-            return false;
-        if (this.getEmailHint() != "Please enter your email address to create an account.")
-            return false;
-        if (this.getEmailTitle() != "Email address")
-            return false;
-        if (this.getCreateButtonTitle() != "Create an account")
+        if (this.getPageTitle() != "CREATE AN ACCOUNT")
             return false;
         return true;
     }
-    public CreateAccountForm typeEmail(String anEmail) {
-        inputEmailAddress.clear();
-        inputEmailAddress.sendKeys(anEmail);
-        return this;
-    }
+
     public CreateAccountForm clickCreateAnAccount() {
-        buttonCreateAccount.submit();
+        buttonRegisterAccount.submit();
         return this;
     }
     public boolean isAlert() {
@@ -163,10 +163,10 @@ public class CreateAccountForm {
         return false;
     }
 
-    public RegistrationPage createNewAccountWithEmail(String email){
-        createAccountAttribute = new CreateAccountAttribute(driver);
-        return createAccountAttribute.typeEmail(email).clickCreateAnAccount();
-    }
+//    public RegistrationPage createNewAccountWithEmail(String email){
+//        createAccountAttribute = new CreateAccountAttribute(driver);
+//        return createAccountAttribute.typeEmail(email).clickCreateAnAccount();
+//    }
 
 
 

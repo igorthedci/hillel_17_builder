@@ -17,7 +17,7 @@ public class Account {
     private String addressAddress2;
     private String addressCity;
     private String addressState;
-    private String addressZipcode;
+    private String addressPostcode;
     private String addressCountry;
     private String addressComment;
     private String addressHomePhone;
@@ -33,7 +33,7 @@ public class Account {
                    String addressFirstName, String addressLastName,
                    String addressCompany, String addressAddress1, String addressAddress2,
                    String addressCity, String addressState,
-                   String addressZipcode, String addressCountry, String addressComment,
+                   String addressPostcode, String addressCountry, String addressComment,
                    String addressHomePhone, String addressMobilePhone, String addressAlias) {
         this.userGender = userGender;
         this.userFirstName = userFirstName;
@@ -50,7 +50,7 @@ public class Account {
         this.addressAddress2 = addressAddress2;
         this.addressCity = addressCity;
         this.addressState = addressState;
-        this.addressZipcode = addressZipcode;
+        this.addressPostcode = addressPostcode;
         this.addressCountry = addressCountry;
         this.addressComment = addressComment;
         this.addressHomePhone = addressHomePhone;
@@ -179,11 +179,11 @@ public class Account {
     }
 
     public String getAddressZipcode() {
-        return addressZipcode;
+        return addressPostcode;
     }
 
-    public void setAddressZipcode(String addressZipcode) {
-        this.addressZipcode = addressZipcode;
+    public void setAddressZipcode(String addressPostcode) {
+        this.addressPostcode = addressPostcode;
     }
 
     public String getAddressCountry() {

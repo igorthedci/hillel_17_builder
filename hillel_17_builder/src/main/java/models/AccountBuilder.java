@@ -17,7 +17,7 @@ public class AccountBuilder {
     private String addressAddress2;
     private String addressCity;
     private String addressState;
-    private String addressZipcode;
+    private String addressPostcode;
     private String addressCountry;
     private String addressComment;
     private String addressHomePhone;
@@ -92,8 +92,8 @@ public class AccountBuilder {
         this.addressState = state;
         return this;
     }
-    public AccountBuilder withAddressZipcode(String zipcode) {
-        this.addressZipcode = zipcode;
+    public AccountBuilder withAddressPostcode(String postcode) {
+        this.addressPostcode = postcode;
         return this;
     }
     public AccountBuilder withAddressCountry(String country) {

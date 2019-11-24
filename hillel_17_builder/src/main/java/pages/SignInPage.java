@@ -14,9 +14,9 @@ public class SignInPage {
         this.driver = driver;
     }
 
-    private AlreadyRegistered alreadyRegistered;
-
-    private CreateAccountAttribute createAccountAttribute;
+//    private AlreadyRegistered alreadyRegistered;
+//
+//    private CreateAccountAttribute createAccountAttribute;
 
     @FindBy(xpath = "//h1")
     private WebElement titlePage;
@@ -76,10 +76,10 @@ public class SignInPage {
         return false;
     }
 
-    public RegistrationPage createNewAccountWithEmail(String email){
-        createAccountAttribute = new CreateAccountAttribute(driver);
-        return createAccountAttribute.typeEmail(email).clickCreateAnAccount();
-    }
+//    public RegistrationPage createNewAccountWithEmail(String email){
+//        createAccountAttribute = new CreateAccountAttribute(driver);
+//        return createAccountAttribute.typeEmail(email).clickCreateAnAccount();
+//    }
 
 
 
