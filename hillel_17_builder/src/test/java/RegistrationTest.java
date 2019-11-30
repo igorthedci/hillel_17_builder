@@ -20,10 +20,10 @@ public class RegistrationTest {
     private final String linkShop = "http://automationpractice.com";
     private WebDriver driver;
 
-    @BeforeClass
-    public static void setupClass() {
-        WebDriverManager.chromedriver().setup();
-    }
+//    @BeforeClass
+//    public static void setupClass() {
+//        WebDriverManager.chromedriver().setup();
+//    }
 
     @Before
     public void beforeTest() {
@@ -71,17 +71,20 @@ public class RegistrationTest {
     public void isRegistrationPageValid() {
         if (headerPage.isUserMode())
             headerPage.clickSignOut();
-        signInPage = headerPage.clickSignIn();
+        headerPage.clickSignIn();
+        signInPage = new SignInPage(driver);
         Assert.assertTrue("If the test failed then Authorization Page is corrupted.",
                 signInPage.isPageValid());
     }
 
     @Test
     public void isNewEmailValid() {
-        String newEmail = new Account().randomEmail(16);
+        String newEmail = Account.randomEmail(16);
+        System.out.println("isNewEmailValid:: random email: " + newEmail);
         if (headerPage.isUserMode())
             headerPage.clickSignOut();
-        signInPage = headerPage.clickSignIn();
+        headerPage.clickSignIn();
+        signInPage = new SignInPage(driver);
         Assert.assertTrue("If the test failed then Authorization Page is corrupted.",
                 signInPage.isPageValid());
         signInPage.typeEmail(newEmail).clickCreateAnAccount();

@@ -24,9 +24,6 @@ public class Account {
     private String addressMobilePhone;
     private String addressAlias;
 
-    public Account() {
-    }
-
     public Account(String userGender, String userFirstName, String userLastName,
                    String userPass, String userEmail,
                    String userDay, String userMonth, String userYear,
@@ -226,14 +223,156 @@ public class Account {
         this.addressAlias = addressAlias;
     }
 
-    public String randomEmail(int emailLength) {
+    public class AccountBuilder {
+        private String userGender;
+        private String userFirstName;
+        private String userLastName;
+        private String userPass;
+        private String userEmail;
+        private String userDay;
+        private String userMonth;
+        private String userYear;
+        private String addressFirstName;
+        private String addressLastName;
+        private String addressCompany;
+        private String addressAddress1;
+        private String addressAddress2;
+        private String addressCity;
+        private String addressState;
+        private String addressPostcode;
+        private String addressCountry;
+        private String addressComment;
+        private String addressHomePhone;
+        private String addressMobilePhone;
+        private String addressAlias;
+
+        public AccountBuilder setUserGender(String userGender) {
+            this.userGender = userGender;
+            return this;
+        }
+
+        public AccountBuilder setUserFirstName(String userFirstName) {
+            this.userFirstName = userFirstName;
+            return this;
+        }
+
+        public AccountBuilder setUserLastName(String userLastName) {
+            this.userLastName = userLastName;
+            return this;
+        }
+
+        public AccountBuilder setUserPass(String userPass) {
+            this.userPass = userPass;
+            return this;
+        }
+
+        public AccountBuilder setUserEmail(String userEmail) {
+            this.userEmail = userEmail;
+            return this;
+        }
+
+        public AccountBuilder setUserDay(String userDay) {
+            this.userDay = userDay;
+            return this;
+        }
+
+        public AccountBuilder setUserMonth(String userMonth) {
+            this.userMonth = userMonth;
+            return this;
+        }
+
+        public AccountBuilder setUserYear(String userYear) {
+            this.userYear = userYear;
+            return this;
+        }
+
+        public AccountBuilder setAddressFirstName(String addressFirstName) {
+            this.addressFirstName = addressFirstName;
+            return this;
+        }
+
+        public AccountBuilder setAddressLastName(String addressLastName) {
+            this.addressLastName = addressLastName;
+            return this;
+        }
+
+        public AccountBuilder setAddressCompany(String addressCompany) {
+            this.addressCompany = addressCompany;
+            return this;
+        }
+
+        public AccountBuilder setAddressAddress1(String addressAddress1) {
+            this.addressAddress1 = addressAddress1;
+            return this;
+        }
+
+        public AccountBuilder setAddressAddress2(String addressAddress2) {
+            this.addressAddress2 = addressAddress2;
+            return this;
+        }
+
+        public AccountBuilder setAddressCity(String addressCity) {
+            this.addressCity = addressCity;
+            return this;
+        }
+
+        public AccountBuilder setAddressState(String addressState) {
+            this.addressState = addressState;
+            return this;
+        }
+
+        public AccountBuilder setAddressPostcode(String addressPostcode) {
+            this.addressPostcode = addressPostcode;
+            return this;
+        }
+
+        public AccountBuilder setAddressCountry(String addressCountry) {
+            this.addressCountry = addressCountry;
+            return this;
+        }
+
+        public AccountBuilder setAddressComment(String addressComment) {
+            this.addressComment = addressComment;
+            return this;
+        }
+
+        public AccountBuilder setAddressHomePhone(String phone) {
+            this.addressHomePhone = phone;
+            return this;
+        }
+
+        public AccountBuilder setAddressMobilePhone(String phone) {
+            this.addressMobilePhone = phone;
+            return this;
+        }
+
+        public AccountBuilder setAddressAlias(String alias) {
+            this.addressAlias = alias;
+            return this;
+        }
+
+        public Account build() {
+            return new Account(
+                    userGender, userFirstName, userLastName,
+                    userPass, userEmail,
+                    userDay, userMonth, userYear,
+                    addressFirstName, addressLastName,
+                    addressCompany, addressAddress1, addressAddress2,
+                    addressCity, addressState,
+                    addressPostcode, addressCountry, addressComment,
+                    addressHomePhone, addressMobilePhone, addressAlias
+            );
+        }
+    }
+
+    public static String randomEmail(int emailLength) {
         String result = "email";
-        String alphabet ="abcdefghijklmnopqrstuvwxyz";
+        String alphabet = "abcdefghijklmnopqrstuvwxyz";
         alphabet = alphabet + "0123456789";
         int aLength = alphabet.length();
 
-        for(int i = 0; i < emailLength; i++) {
-            result += alphabet.charAt((int) (Math.random() * (1 + aLength)));
+        for (int i = 0; i < emailLength; i++) {
+            result += alphabet.charAt((int) (Math.random() * aLength));
         }
 
         result += "@gmail.com";

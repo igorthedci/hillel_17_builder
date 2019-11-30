@@ -6,10 +6,13 @@ import net.bytebuddy.build.ToStringPlugin;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SignInPage {
 
     private WebDriver driver;
+
     public SignInPage(WebDriver driver) {
         this.driver = driver;
     }
@@ -36,40 +39,52 @@ public class SignInPage {
     public String getPageTitle() {
         return titlePage.getText();
     }
+
     public String getCreateAccountTitle() {
         return titleCreateAccount.getText();
     }
+
     public String getEmailHint() {
         return textEmailHint.getText();
     }
+
     public String getEmailTitle() {
         return titleEmailAddress.getText();
     }
+
     public String getCreateButtonTitle() {
         return buttonCreateAccount.getText();
     }
+
     public boolean isPageValid() {
-        if (this.getPageTitle() != "AUTHENTICATION")
+
+        WebDriverWait waitForButton = new WebDriverWait(driver, 10);
+        waitForButton.until(ExpectedConditions.visibilityOf(buttonCreateAccount));
+
+        if (!this.getPageTitle().equals("AUTHENTICATION"))
             return false;
-        if (this.getCreateAccountTitle() != "CREATE AN ACCOUNT")
+        if (!this.getCreateAccountTitle().equals("CREATE AN ACCOUNT"))
             return false;
-        if (this.getEmailHint() != "Please enter your email address to create an account.")
+        if (!this.getEmailHint().equals("Please enter your email address to create an account."))
             return false;
-        if (this.getEmailTitle() != "Email address")
+        if (!this.getEmailTitle().equals("Email address"))
             return false;
-        if (this.getCreateButtonTitle() != "Create an account")
+        if (!this.getCreateButtonTitle().equals("Create an account"))
             return false;
         return true;
     }
+
     public SignInPage typeEmail(String anEmail) {
         inputEmailAddress.clear();
         inputEmailAddress.sendKeys(anEmail);
         return this;
     }
+
     public SignInPage clickCreateAnAccount() {
         buttonCreateAccount.submit();
         return this;
     }
+
     public boolean isAlert() {
         if (alertCreateAccount != null)
             return true;
@@ -80,7 +95,6 @@ public class SignInPage {
 //        createAccountAttribute = new CreateAccountAttribute(driver);
 //        return createAccountAttribute.typeEmail(email).clickCreateAnAccount();
 //    }
-
 
 
 }
