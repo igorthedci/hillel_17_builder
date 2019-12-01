@@ -6,6 +6,7 @@ import net.bytebuddy.build.ToStringPlugin;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -15,6 +16,7 @@ public class SignInPage {
 
     public SignInPage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
 //    private AlreadyRegistered alreadyRegistered;
@@ -57,12 +59,15 @@ public class SignInPage {
     }
 
     public boolean isPageValid() {
+        System.out.println("SignInPage.isPageValid::");
 
-        WebDriverWait waitForButton = new WebDriverWait(driver, 10);
-        waitForButton.until(ExpectedConditions.visibilityOf(buttonCreateAccount));
+//        WebDriverWait waitForButton = new WebDriverWait(driver, 10);
+//        waitForButton.until(ExpectedConditions.visibilityOf(buttonCreateAccount));
 
-        if (!this.getPageTitle().equals("AUTHENTICATION"))
+        if (!this.getPageTitle().equals("AUTHENTICATION")) {
+            System.out.println("SignInPage.isPageValid:: pageTitle: " + this.getPageTitle());
             return false;
+        }
         if (!this.getCreateAccountTitle().equals("CREATE AN ACCOUNT"))
             return false;
         if (!this.getEmailHint().equals("Please enter your email address to create an account."))

@@ -1,5 +1,6 @@
 package pages;
 
+import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -57,32 +58,34 @@ public class HeaderPage {
         return this;
     }
 
-    public SignInPage clickSignIn() {
-        WebDriverWait loginWait = new WebDriverWait(driver, 5);
-        loginWait.until(ExpectedConditions.elementToBeClickable(locatorTitleSignIn));
+    public HeaderPage clickSignIn() {
+        System.out.println("HeaderPage.clickSignIn::");
+//        WebDriverWait loginWait = new WebDriverWait(driver, 5);
+//        loginWait.until(ExpectedConditions.elementToBeClickable(locatorTitleSignIn));
         titleSignIn.click();
-        loginWait.until(ExpectedConditions.presenceOfElementLocated(emailLocator));
-        return new SignInPage(driver);
+//        loginWait.until(ExpectedConditions.presenceOfElementLocated(emailLocator));
+        return this;
     }
 
     public HeaderPage clickSignOut() {
+        System.out.println("HeaderPage.clickSignOut::");
         titleSignOut.click();
         return this; // QUESTION: may be new HeaderPage() ???
     }
 
     public boolean isGuestMode() {
+        System.out.println("HeaderPage:: titleSignIn: " + titleSignIn);
         try {
-            WebElement titleSignIn = driver.findElement(locatorTitleSignIn);
-            return true;
+            return titleSignIn.isEnabled();
         } catch (Exception NoSuchElementException) {
             return false;
         }
     }
 
     public boolean isUserMode() {
+        System.out.println("HeaderPage:: titleSignOut: " + titleSignOut);
         try {
-            WebElement titleSignOut = driver.findElement(locatorTitleSignOut);
-            return true;
+            return titleSignOut.isEnabled();
         } catch (Exception NoSuchElementException) {
             return false;
         }
