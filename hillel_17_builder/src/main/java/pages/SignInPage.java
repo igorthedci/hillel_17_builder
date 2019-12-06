@@ -12,12 +12,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SignInPage {
 
-    private WebDriver driver;
-
-    public SignInPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
 
 //    private AlreadyRegistered alreadyRegistered;
 //
@@ -27,7 +21,7 @@ public class SignInPage {
     private WebElement titlePage;
     @FindBy(xpath = "//form[@id='create-account_form']/h3")
     private WebElement titleCreateAccount;
-    @FindBy(xpath = "//form[@id='create-account_form']/div")
+    @FindBy(xpath = "//form[@id='create-account_form']/div/p")
     private WebElement textEmailHint;
     @FindBy(xpath = "//label[@for='email_create']")
     private WebElement titleEmailAddress;
@@ -37,6 +31,13 @@ public class SignInPage {
     private WebElement buttonCreateAccount;
     @FindBy(xpath = "//div[@id='create_account_error']")
     private WebElement alertCreateAccount;
+
+    private WebDriver driver;
+
+    public SignInPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
 
     public String getPageTitle() {
         return titlePage.getText();
@@ -61,21 +62,26 @@ public class SignInPage {
     public boolean isPageValid() {
         System.out.println("SignInPage.isPageValid::");
 
-//        WebDriverWait waitForButton = new WebDriverWait(driver, 10);
-//        waitForButton.until(ExpectedConditions.visibilityOf(buttonCreateAccount));
-
         if (!this.getPageTitle().equals("AUTHENTICATION")) {
             System.out.println("SignInPage.isPageValid:: pageTitle: " + this.getPageTitle());
             return false;
         }
-        if (!this.getCreateAccountTitle().equals("CREATE AN ACCOUNT"))
+        if (!this.getCreateAccountTitle().equals("CREATE AN ACCOUNT")) {
+            System.out.println("SignInPage.isPageValid:: createAccountTitle: " + this.getCreateAccountTitle());
             return false;
-        if (!this.getEmailHint().equals("Please enter your email address to create an account."))
+        }
+        if (!this.getEmailHint().equals("Please enter your email address to create an account.")) {
+            System.out.println("SignInPage.isPageValid:: emailHint: " + this.getEmailHint());
             return false;
-        if (!this.getEmailTitle().equals("Email address"))
+        }
+        if (!this.getEmailTitle().equals("Email address")) {
+            System.out.println("SignInPage.isPageValid:: emailTitle: " + this.getEmailTitle());
             return false;
-        if (!this.getCreateButtonTitle().equals("Create an account"))
+        }
+        if (!this.getCreateButtonTitle().equals("Create an account")) {
+            System.out.println("SignInPage.isPageValid:: createButtonTitle: " + this.getCreateButtonTitle());
             return false;
+        }
         return true;
     }
 
