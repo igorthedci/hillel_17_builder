@@ -1,5 +1,3 @@
-import io.github.bonigarcia.wdm.ChromeDriverManager;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import models.Account;
 import org.junit.*;
 import org.openqa.selenium.WebDriver;
@@ -94,6 +92,41 @@ public class RegistrationTest {
         createAccountPage = new CreateAccountPage(driver);
         System.out.println("TEST:: isNewEmailValid: Create Account page is "
                 + createAccountPage.isPageValid());
+    }
+
+    @Test
+    public void isNewFormValid() throws Exception {
+        String newEmail = Account.randomEmail(16);
+        String newPassword = Account.randomPassword(8);
+        Account newAccount;
+
+        headerPage.clickSignIn();
+        signInPage = new SignInPage(driver);
+//        Assert.assertTrue("If the test failed then Authorization Page is corrupted.",
+//                createAccountPage.isPageValid());
+        signInPage.typeEmail(newEmail).clickCreateAnAccount();
+        Thread.sleep(3000);
+        createAccountPage = new CreateAccountPage(driver);
+        System.out.println("TEST:: isNewEmailValid: Create Account page is "
+                + createAccountPage.isPageValid());
+
+        newAccount = new Account.AccountBuilder()
+                .setPersonalFirstName("FirstName")
+                .setPersonalLastName("LastName")
+                .setPersonalEmail(newEmail)
+                .setPersonalPassword(newPassword)
+                .setAddressFirstName("FirstName")
+                .setAddressLastName("LastName")
+                .setAddressAddress1("Test Address 111")
+                .setAddressCity("District Capital")
+                .setAddressPostcode("01234")
+                .setAddressHomePhone("111111111")
+                .setAddressMobilePhone("222222222")
+                .setAddressAlias("qq@qq.qq")
+                .build();
+        createAccountPage
+                .fillAccountForm(newAccount)
+                .clickCreateAnAccount();
     }
 
     @Test

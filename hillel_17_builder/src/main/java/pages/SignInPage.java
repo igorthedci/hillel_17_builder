@@ -2,6 +2,7 @@ package pages;
 
 
 import com.google.common.annotations.VisibleForTesting;
+import models.Account;
 import net.bytebuddy.build.ToStringPlugin;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

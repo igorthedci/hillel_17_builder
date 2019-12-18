@@ -2,14 +2,14 @@ package models;
 
 public class Account {
 
-    private String userGender;
-    private String userFirstName;
-    private String userLastName;
-    private String userPass;
-    private String userEmail;
-    private String userDay;
-    private String userMonth;
-    private String userYear;
+    private String personalGender;
+    private String personalFirstName;
+    private String personalLastName;
+    private String personalEmail;
+    private String personalPassword;
+    private String personalDay;
+    private String personalMonth;
+    private String personalYear;
     private String addressFirstName;
     private String addressLastName;
     private String addressCompany;
@@ -24,22 +24,22 @@ public class Account {
     private String addressMobilePhone;
     private String addressAlias;
 
-    public Account(String userGender, String userFirstName, String userLastName,
-                   String userPass, String userEmail,
-                   String userDay, String userMonth, String userYear,
+    public Account(String personalGender, String personalFirstName, String personalLastName,
+                   String personalEmail, String personalPassword,
+                   String personalDay, String personalMonth, String personalYear,
                    String addressFirstName, String addressLastName,
                    String addressCompany, String addressAddress1, String addressAddress2,
                    String addressCity, String addressState,
                    String addressPostcode, String addressCountry, String addressComment,
                    String addressHomePhone, String addressMobilePhone, String addressAlias) {
-        this.userGender = userGender;
-        this.userFirstName = userFirstName;
-        this.userLastName = userLastName;
-        this.userPass = userPass;
-        this.userEmail = userEmail;
-        this.userDay = userDay;
-        this.userMonth = userMonth;
-        this.userYear = userYear;
+        this.personalGender = personalGender;
+        this.personalFirstName = personalFirstName;
+        this.personalLastName = personalLastName;
+        this.personalEmail = personalEmail;
+        this.personalPassword = personalPassword;
+        this.personalDay = personalDay;
+        this.personalMonth = personalMonth;
+        this.personalYear = personalYear;
         this.addressFirstName = addressFirstName;
         this.addressLastName = addressLastName;
         this.addressCompany = addressCompany;
@@ -55,68 +55,68 @@ public class Account {
         this.addressAlias = addressAlias;
     }
 
-    public String getUserGender() {
-        return userGender;
+    public String getPersonalGender() {
+        return personalGender;
     }
 
-    public void setUserGender(String userGender) {
-        this.userGender = userGender;
+    public void setPersonalGender(String personalGender) {
+        this.personalGender = personalGender;
     }
 
-    public String getUserFirstName() {
-        return userFirstName;
+    public String getPersonalFirstName() {
+        return personalFirstName;
     }
 
-    public void setUserFirstName(String userFirstName) {
-        this.userFirstName = userFirstName;
+    public void setPersonalFirstName(String personalFirstName) {
+        this.personalFirstName = personalFirstName;
     }
 
-    public String getUserLastName() {
-        return userLastName;
+    public String getPersonalLastName() {
+        return personalLastName;
     }
 
-    public void setUserLastName(String userLastName) {
-        this.userLastName = userLastName;
+    public void setPersonalLastName(String personalLastName) {
+        this.personalLastName = personalLastName;
     }
 
-    public String getUserPass() {
-        return userPass;
+    public String getPersonalPassword() {
+        return personalPassword;
     }
 
-    public void setUserPass(String userPass) {
-        this.userPass = userPass;
+    public void setPersonalPassword(String personalPassword) {
+        this.personalPassword = personalPassword;
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public String getPersonalEmail() {
+        return personalEmail;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void setPersonalEmail(String personalEmail) {
+        this.personalEmail = personalEmail;
     }
 
-    public String getUserDay() {
-        return userDay;
+    public String getPersonalDay() {
+        return personalDay;
     }
 
-    public void setUserDay(String userDay) {
-        this.userDay = userDay;
+    public void setPersonalDay(String personalDay) {
+        this.personalDay = personalDay;
     }
 
-    public String getUserMonth() {
-        return userMonth;
+    public String getPersonalMonth() {
+        return personalMonth;
     }
 
-    public void setUserMonth(String userMonth) {
-        this.userMonth = userMonth;
+    public void setPersonalMonth(String personalMonth) {
+        this.personalMonth = personalMonth;
     }
 
-    public String getUserYear() {
-        return userYear;
+    public String getPersonalYear() {
+        return personalYear;
     }
 
-    public void setUserYear(String userYear) {
-        this.userYear = userYear;
+    public void setPersonalYear(String personalYear) {
+        this.personalYear = personalYear;
     }
 
     public String getAddressFirstName() {
@@ -175,11 +175,11 @@ public class Account {
         this.addressState = addressState;
     }
 
-    public String getAddressZipcode() {
+    public String getAddressPostcode() {
         return addressPostcode;
     }
 
-    public void setAddressZipcode(String addressPostcode) {
+    public void setAddressPostcode(String addressPostcode) {
         this.addressPostcode = addressPostcode;
     }
 
@@ -223,15 +223,15 @@ public class Account {
         this.addressAlias = addressAlias;
     }
 
-    public class AccountBuilder {
-        private String userGender;
-        private String userFirstName;
-        private String userLastName;
-        private String userPass;
-        private String userEmail;
-        private String userDay;
-        private String userMonth;
-        private String userYear;
+    public static class AccountBuilder {
+        private String personalGender;
+        private String personalFirstName;
+        private String personalLastName;
+        private String personalPassword;
+        private String personalEmail;
+        private String personalDay;
+        private String personalMonth;
+        private String personalYear;
         private String addressFirstName;
         private String addressLastName;
         private String addressCompany;
@@ -246,43 +246,43 @@ public class Account {
         private String addressMobilePhone;
         private String addressAlias;
 
-        public AccountBuilder setUserGender(String userGender) {
-            this.userGender = userGender;
+        public AccountBuilder setPersonalGender(String personalGender) {
+            this.personalGender = personalGender;
             return this;
         }
 
-        public AccountBuilder setUserFirstName(String userFirstName) {
-            this.userFirstName = userFirstName;
+        public AccountBuilder setPersonalFirstName(String userFirstName) {
+            this.personalFirstName = userFirstName;
             return this;
         }
 
-        public AccountBuilder setUserLastName(String userLastName) {
-            this.userLastName = userLastName;
+        public AccountBuilder setPersonalLastName(String theString) {
+            this.personalLastName = theString;
             return this;
         }
 
-        public AccountBuilder setUserPass(String userPass) {
-            this.userPass = userPass;
+        public AccountBuilder setPersonalEmail(String theString) {
+            this.personalEmail = theString;
             return this;
         }
 
-        public AccountBuilder setUserEmail(String userEmail) {
-            this.userEmail = userEmail;
+        public AccountBuilder setPersonalPassword(String theString) {
+            this.personalPassword = theString;
             return this;
         }
 
-        public AccountBuilder setUserDay(String userDay) {
-            this.userDay = userDay;
+        public AccountBuilder setPersonalDay(String personalDay) {
+            this.personalDay = personalDay;
             return this;
         }
 
-        public AccountBuilder setUserMonth(String userMonth) {
-            this.userMonth = userMonth;
+        public AccountBuilder setPersonalMonth(String personalMonth) {
+            this.personalMonth = personalMonth;
             return this;
         }
 
-        public AccountBuilder setUserYear(String userYear) {
-            this.userYear = userYear;
+        public AccountBuilder setPersonalYear(String personalYear) {
+            this.personalYear = personalYear;
             return this;
         }
 
@@ -353,9 +353,9 @@ public class Account {
 
         public Account build() {
             return new Account(
-                    userGender, userFirstName, userLastName,
-                    userPass, userEmail,
-                    userDay, userMonth, userYear,
+                    personalGender, personalFirstName, personalLastName,
+                    personalEmail, personalPassword,
+                    personalDay, personalMonth, personalYear,
                     addressFirstName, addressLastName,
                     addressCompany, addressAddress1, addressAddress2,
                     addressCity, addressState,
@@ -376,6 +376,22 @@ public class Account {
         }
 
         result += "@gmail.com";
+        System.out.println("randomEmail:: random email: " + result);
+        return result;
+    }
+
+    public static String randomPassword(int theLength) {
+        String result = "";
+        String alphabet = "abcdefghijklmnopqrstuvwxyz";
+        alphabet = alphabet + "0123456789";
+        alphabet = alphabet + "!@#$%^&*()";
+        int aLength = alphabet.length();
+
+        for (int i = 0; i < theLength; i++) {
+            result += alphabet.charAt((int) (Math.random() * aLength));
+        }
+
+        System.out.println("randomPassword:: random password: " + result);
         return result;
     }
 }
